@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2>Patient Profile: {{ profile.first_name }} {{ profile.last_name }}</h2>
+        <a href="{{ url_for('doctor_dashboard') }}" class="btn btn-secondary">Back to Dashboard</a>
+    </div>
+
+    <div class="card mb-4">
+        <div class="card-header">
+            <h4 class="mb-0">Basic Information</h4>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <p><strong>Name:</strong> {{ profile.first_name }} {{ profile.last_name }}</p>
+                    <p><strong>Phone:</strong> {{ profile.phone }}</p>
+                    <p><strong>Date of Birth:</strong> {{ profile.date_of_birth.strftime('%B %d, %Y') }}</p>
+                </div>
+                <div class="col-md-6">
+                    <p><strong>Gender:</strong> {{ profile.gender }}</p>
+                    <p><strong>Blood Group:</strong> {{ profile.blood_group if profile.blood_group else 'Not specified' }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card mb-4">
+        <div class="card-header">
+            <h4 class="mb-0">Medical Information</h4>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-12">
+                    <p><strong>Allergies:</strong></p>
+                    <p class="text-muted">{{ profile.allergies if profile.allergies else 'None reported' }}</p>
+                    
+                    <p><strong>Medical Conditions:</strong></p>
+                    <p class="text-muted">{{ profile.medical_conditions if profile.medical_conditions else 'None reported' }}</p>
+                    
+                    <p><strong>Current Medications:</strong></p>
+                    <p class="text-muted">{{ profile.current_medications if profile.current_medications else 'None reported' }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-header">
+            <h4 class="mb-0">Emergency Contact</h4>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <p><strong>Name:</strong> {{ profile.emergency_contact_name }}</p>
+                </div>
+                <div class="col-md-6">
+                    <p><strong>Phone:</strong> {{ profile.emergency_contact_phone }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 
