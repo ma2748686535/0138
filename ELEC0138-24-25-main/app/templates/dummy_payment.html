@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Dummy Payment</title>
+</head>
+<body>
+    <h2>Complete Payment for Online Consultation</h2>
+    <button onclick="confirmPayment()">Simulate Payment</button>
+
+    <script>
+        function confirmPayment() {
+            alert("Payment Successful! Redirecting to appointment booking...");
+            window.location.href = "{{ url_for('book_appointment') }}";
+        }
+    </script>
+</body>
+</html>

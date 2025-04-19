@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Register</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+
+<style>
+    body {
+        opacity: 0;
+        transition: opacity 0.5s ease-in-out;
+    }
+    .btn {
+    transition: all 0.3s ease-in-out;
+}
+
+.btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+</style>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        document.body.style.opacity = 1;
+    });
+</script>
+<body class="d-flex justify-content-center align-items-center vh-100" style="background-color: #f8f9fa;">
+
+    <div class="card shadow-lg p-4" style="width: 400px;">
+        <h2 class="text-center mb-4">Register</h2>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        <form method="POST">
+            <div class="mb-3">
+                <label class="form-label">Username:</label>
+                <input type="text" name="username" class="form-control form-control-lg" required>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Password:</label>
+                <input type="password" name="password" class="form-control form-control-lg" required>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Role:</label>
+                <select name="role" id="role" class="form-control form-control-lg" required onchange="toggleSpecialization()">
+                    <option value="patient">Patient</option>
+                    <option value="doctor">Doctor</option>
+                </select>
+            </div>
+
+            <!-- Specialization field (Only shown when "Doctor" is selected) -->
+            <div class="mb-3" id="specializationField" style="display: none;">
+                <label class="form-label">Specialization:</label>
+                <select name="specialization" class="form-control form-control-lg">
+                    <option value="Cardiologist">Cardiologist</option>
+                    <option value="Dermatologist">Dermatologist</option>
+                    <option value="Neurologist">Neurologist</option>
+                    <option value="Orthopedic">Orthopedic</option>
+                    <option value="Pediatrician">Pediatrician</option>
+                    <option value="General Physician">General Physician</option>
+                </select>
+            </div>
+
+            <!-- Invitation Code field (Only shown when "Doctor" is selected) -->
+            <div class="mb-3" id="inviteCodeField" style="display: none;">
+                <label class="form-label">Invitation Code:</label>
+                <input type="text" name="invite_code" class="form-control form-control-lg" placeholder="Enter your invitation code">
+                <div class="form-text text-muted">A valid invitation code is required to register as a doctor.</div>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-lg w-100">Register</button>
+        </form>
+
+        <div class="text-center mt-3">
+            <p>Already have an account? <a href="{{ url_for('login') }}">Login</a></p>
+        </div>
+    </div>
+
+    <script>
+        function toggleSpecialization() {
+            var role = document.getElementById("role").value;
+            var specializationField = document.getElementById("specializationField");
+            var inviteCodeField = document.getElementById("inviteCodeField");
+            
+            if (role === "doctor") {
+                specializationField.style.display = "block";
+                inviteCodeField.style.display = "block";
+            } else {
+                specializationField.style.display = "none";
+                inviteCodeField.style.display = "none";
+            }
+        }
+    </script>
+
+</body>
+</html>
