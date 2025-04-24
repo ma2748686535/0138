@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1 class="text-center mb-4">Doctor Dashboard</h1>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="alert alert-{{ category }}">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    {% if appointments %}
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Patient</th>
+                    <th>Date</th>
+                    <th>Time</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for appointment in appointments %}
+                    <tr>
+                        <td>
+                            {{ appointment.patient_name }}
+                            <a href="{{ url_for('view_patient_profile', username=appointment.patient_name) }}" 
+                               class="btn btn-info btn-sm ms-2">View Profile</a>
+                        </td>
+                        <td>{{ appointment.date }}</td>
+                        <td>{{ appointment.time }}</td>
+                        <td>
+                            {% if appointment.status == "Pending" %}
+                                <span class="badge bg-warning">Pending</span>
+                            {% elif appointment.status == "Approved" %}
+                                <span class="badge bg-success">Approved</span>
+                            {% else %}
+                                <span class="badge bg-danger">Rejected</span>
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if appointment.status == "Pending" %}
+                                <a href="{{ url_for('approve_appointment', id=appointment.id) }}" class="btn btn-success btn-sm">Approve</a>
+                                <a href="{{ url_for('reject_appointment', id=appointment.id) }}" class="btn btn-danger btn-sm">Reject</a>
+                            {% else %}
+                                <span class="text-muted">Action Taken</span>
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p class="text-muted text-center">No pending appointments.</p>
+    {% endif %}
+
+    <div class="text-center mt-3">
+        <a href="{{ url_for('home') }}" class="btn btn-secondary">Back to Home</a>
+    </div>
+</div>
+{% endblock %}

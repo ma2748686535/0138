@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Login</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+
+<style>
+    body {
+        opacity: 0;
+        transition: opacity 0.5s ease-in-out;
+    }
+
+    .btn {
+    transition: all 0.3s ease-in-out;
+}
+
+.btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+slide-in {
+        animation: slideIn 0.5s ease-out;
+    }
+    
+    @keyframes slideIn {
+        from { transform: translateY(-20px); opacity: 0; }
+        to { transform: translateY(0); opacity: 1; }
+    }
+
+</style>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        document.body.style.opacity = 1;
+    });
+</script>
+<body class="d-flex justify-content-center align-items-center vh-100" style="background-color: #f8f9fa;">
+
+    <div class="card shadow-lg p-4" style="width: 400px;">
+        <h2 class="text-center mb-4">Login</h2>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        <div id="flash-messages">
+            {% for category, message in messages %}
+                <div class="alert alert-{{ category }} slide-in">{{ message }}</div>
+            {% endfor %}
+        </div>
+    {% endif %}
+{% endwith %}
+
+        <form method="POST">
+            <div class="mb-3">
+                <label class="form-label">Username:</label>
+                <input type="text" name="username" class="form-control form-control-lg" required>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Password:</label>
+                <input type="password" name="password" class="form-control form-control-lg" required>
+            </div>
+
+            <button type="submit" class="btn btn-success btn-lg w-100">Login</button>
+        </form>
+
+        <div class="text-center mt-3">
+            <p>Don't have an account? <a href="{{ url_for('register') }}">Register</a></p>
+        </div>
+    </div>
+
+</body>
+</html>
