@@ -1,4 +1,5 @@
 Attacks Demonstrated
+
 🔥 1. HTTP Flood (DoS)
 File: http_flood.py
 
@@ -18,6 +19,8 @@ When a doctor views this profile, a fake login popup appears (credential phishin
 Credentials are silently sent to an attacker endpoint.
 
 Impact: Exfiltrates sensitive doctor credentials through client-side script execution.
+
+
 
 Defense Mechanisms
 ✅ Activate Defenses
