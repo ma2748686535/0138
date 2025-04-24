@@ -1,0 +1,7 @@
+streamlit
+joblib
+scikit-learn==1.6.1
+pandas
+tldextract
+nltk
+regex
