@@ -1,0 +1,15 @@
+{
+  "campaign_name": "Security Awareness Test",
+  "template": "phishing_email.html",
+  "subject": "Important Security Alert - Action Required",
+  "sender_email": "Yyuanzhehu2024@gmail.com",
+  "sender_password": "osml rhlm ookm fmrm",
+  "smtp_server": "smtp.gmail.com",
+  "smtp_port": 587,
+  "recipients_csv": "recipients.csv",
+  "randomize_delay": true,
+  "min_delay_seconds": 5,
+  "max_delay_seconds": 30,
+  "track_opens": true,
+  "track_clicks": true
+} 
